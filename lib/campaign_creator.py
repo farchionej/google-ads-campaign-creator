@@ -502,6 +502,26 @@ class CampaignCreator:
         for theme in group_config.get("search_themes", [])[:25]:
             operations.append({"assetGroupSignalOperation": {"create": {"assetGroup": f"customers/{self.account_id}/assetGroups/{ag_temp_id}", "searchTheme": {"text": theme}}}})
 
+        # Audience signals (for PE PMax)
+        if audience_signals:
+            signal_op = {
+                "assetGroupSignalOperation": {
+                    "create": {
+                        "assetGroup": f"customers/{self.account_id}/assetGroups/{ag_temp_id}",
+                        "audience": {
+                            "userInterests": []
+                        }
+                    }
+                }
+            }
+            if audience_signals.get("in_market_audiences"):
+                for aud in audience_signals["in_market_audiences"]:
+                    signal_op["assetGroupSignalOperation"]["create"]["audience"]["userInterests"].append({
+                        "userInterestCategory": f"customers/{self.account_id}/userInterests/{aud.get('id', '')}"
+                    })
+            if signal_op["assetGroupSignalOperation"]["create"]["audience"]["userInterests"]:
+                operations.append(signal_op)
+
         success, response = self._api_request(url, "POST", {"mutateOperations": operations})
         if success:
             results = response.get("mutateOperationResponses", [])

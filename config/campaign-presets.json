@@ -209,10 +209,12 @@
       }
     },
     "in_market_audiences": [
-      {"name": "Event Planning Services", "id": "80432"},
-      {"name": "Catering Services", "id": "80433"},
-      {"name": "Wedding Services", "id": "80434"}
+      {"name": "Event Planning Services", "id": "80512", "category": "in_market"},
+      {"name": "Corporate Event Planning", "id": "80521", "category": "in_market"},
+      {"name": "Party Supplies & Planning", "id": "80504", "category": "in_market"},
+      {"name": "Wedding Planning", "id": "80404", "category": "in_market"}
     ],
+    "_in_market_notes": "4 audiences confirmed via Google Ads user_interest API. 6 additional 'In-market: other' segments (Event Venues, Event Planners, Party Event Planners, Event Planning Programs, Event Coordinator, Corporate Events and Activities Ideas) are UI-only suggestions without stable API criterion IDs — add manually in Google Ads UI.",
     "demographics": {
       "age_min": 25,
       "age_max": 65,

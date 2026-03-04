@@ -136,7 +136,15 @@ Without audience signals, PE PMax leaks 30%+ of impressions to general food quer
 
 Required signals:
 - **Custom segments**: Event venue searches, competitor URLs (peerspace.com, theknot.com)
-- **In-market audiences**: Event Planning Services, Catering Services, Wedding Services
+- **In-market audiences (API-available, 4 segments)**:
+  - Event Planning Services (ID: 80512)
+  - Corporate Event Planning (ID: 80521)
+  - Party Supplies & Planning (ID: 80504)
+  - Wedding Planning (ID: 80404)
+- **In-market: other (UI-only, add manually in Google Ads)**:
+  - Event Venues, Event Planners, Party Event Planners
+  - Event Planning Programs, Event Coordinator
+  - Party Planning, Corporate Events and Activities Ideas
 - **Demographics**: Age 25-65, top 50% household income
 
 ### Asset Group Themes
