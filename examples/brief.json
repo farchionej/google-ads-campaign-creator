@@ -1,0 +1,79 @@
+{
+  "_description": "Campaign-specific creative brief for Underdogs Cantina. Reference example for the campaign creation framework.",
+  "client_key": "underdogs_cantina",
+  "campaigns": {
+    "foot_traffic_pmax": {
+      "template": "foot_traffic_pmax",
+      "headline_overrides": {
+        "2": "Mexican Food Inner Sunset"
+      },
+      "custom_headlines": [
+        "Cantina in Inner Sunset",
+        "Sports Bar & Mexican Food",
+        "Watch the Game at Cantina"
+      ],
+      "description_overrides": {},
+      "custom_descriptions": [
+        "Underdogs Cantina: Mexican food, craft cocktails, and every game on TV. Inner Sunset, San Francisco."
+      ],
+      "images": {
+        "landscape": ["images/ls_exterior.jpg", "images/ls_food_spread.jpg", "images/ls_game_day.jpg"],
+        "square": ["images/sq_tacos.jpg", "images/sq_margarita.jpg", "images/sq_interior.jpg"],
+        "logo": ["images/logo_main.png"],
+        "portrait": ["images/pt_bar.jpg"]
+      },
+      "search_themes": [
+        "mexican restaurant inner sunset",
+        "sports bar san francisco",
+        "best tacos inner sunset",
+        "cantina san francisco",
+        "watch game inner sunset",
+        "mexican food san francisco",
+        "happy hour inner sunset",
+        "margaritas san francisco"
+      ]
+    },
+    "pe_search": {
+      "template": "pe_search",
+      "headline_overrides": {
+        "3": "Cantina Private Events"
+      },
+      "custom_headlines": [
+        "Sports Bar Private Events",
+        "Game Day Party Venue"
+      ],
+      "description_overrides": {
+        "0": "Host unforgettable private events at Underdogs Cantina. Custom menus, big screens, full bar, Inner Sunset."
+      },
+      "custom_descriptions": [
+        "Book a private event at Underdogs Cantina. Sports bar atmosphere, Mexican food, flexible space for 20-80 guests."
+      ],
+      "images": null,
+      "search_themes": null
+    },
+    "pe_pmax": {
+      "template": "pe_pmax",
+      "headline_overrides": {},
+      "custom_headlines": [
+        "Cantina Private Events",
+        "Sports Bar Event Space"
+      ],
+      "description_overrides": {},
+      "custom_descriptions": [],
+      "images": {
+        "landscape": ["images/ls_private_room.jpg", "images/ls_event_setup.jpg"],
+        "square": ["images/sq_private_event.jpg", "images/sq_group_dining.jpg"],
+        "logo": ["images/logo_main.png"],
+        "portrait": []
+      },
+      "search_themes": [
+        "private event venue san francisco",
+        "sports bar private events san francisco",
+        "corporate event space inner sunset",
+        "birthday party venue san francisco",
+        "private dining san francisco",
+        "team building venue san francisco"
+      ]
+    }
+  }
+}

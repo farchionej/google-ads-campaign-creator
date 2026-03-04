@@ -1,0 +1,195 @@
+{
+  "_description": "Keyword seed templates for Google Ads restaurant campaigns. Variables: {city}, {neighborhood}, {cuisine}, {client_name}. All PE keywords are PHRASE match (exact got zero clicks at Tres in 54 days).",
+  "_version": "1.0",
+  "_updated": "2026-03-04",
+
+  "pe_keywords": {
+    "_critical": "PHRASE match only. Tres added 15 EXACT match PE keywords → zero clicks in 54 days. Cantina converts on phrase match.",
+    "match_type": "PHRASE",
+    "templates": [
+      "private dining {city}",
+      "private dining room {city}",
+      "event space rental {city}",
+      "restaurants with private rooms {city}",
+      "private party space {city}",
+      "corporate event space {city}",
+      "team building activities {city}",
+      "team building venue {city}",
+      "party venue {city}",
+      "birthday party restaurant {city}",
+      "celebration dinner {city}",
+      "rehearsal dinner {city}",
+      "wedding reception restaurant {city}",
+      "private event venues {city}",
+      "restaurant rental space for party",
+      "affordable private dining {city}",
+      "corporate dinner {city}",
+      "company dinner {city}",
+      "group dining {city}",
+      "large party restaurant {city}"
+    ]
+  },
+
+  "foot_traffic_keywords_by_cuisine": {
+    "_description": "Localized keyword templates by cuisine type. Used for PMax search themes.",
+    "mexican": [
+      "mexican restaurant {city}",
+      "mexican food {neighborhood}",
+      "best mexican restaurant {city}",
+      "tacos {neighborhood}",
+      "margaritas {city}",
+      "mexican food near {neighborhood}",
+      "cantina {city}",
+      "best tacos {city}"
+    ],
+    "chinese": [
+      "chinese restaurant {city}",
+      "chinese food {neighborhood}",
+      "best chinese restaurant {city}",
+      "dim sum {city}",
+      "chinese food near {neighborhood}",
+      "cantonese restaurant {city}",
+      "chinese banquet {city}"
+    ],
+    "italian": [
+      "italian restaurant {city}",
+      "italian food {neighborhood}",
+      "best italian restaurant {city}",
+      "pasta {neighborhood}",
+      "italian dinner {city}",
+      "italian food near {neighborhood}",
+      "trattoria {city}"
+    ],
+    "japanese": [
+      "japanese restaurant {city}",
+      "japanese food {neighborhood}",
+      "best japanese restaurant {city}",
+      "sushi {neighborhood}",
+      "omakase {city}",
+      "izakaya {city}",
+      "japanese food near {neighborhood}"
+    ],
+    "american": [
+      "restaurants {neighborhood}",
+      "best restaurants {city}",
+      "food near {neighborhood}",
+      "dinner {neighborhood}",
+      "restaurants near {neighborhood}",
+      "places to eat {city}",
+      "burgers {neighborhood}",
+      "steakburgers {city}"
+    ],
+    "french": [
+      "french restaurant {city}",
+      "french food {neighborhood}",
+      "best french restaurant {city}",
+      "bistro {neighborhood}",
+      "french bistro {city}",
+      "fine dining {city}",
+      "french food near {neighborhood}"
+    ],
+    "sports_bar": [
+      "sports bar {city}",
+      "sports bar {neighborhood}",
+      "watch game {city}",
+      "bar with tvs {neighborhood}",
+      "football bar {city}",
+      "game day {neighborhood}",
+      "best sports bar {city}"
+    ],
+    "fine_dining": [
+      "fine dining {city}",
+      "best restaurants {city}",
+      "upscale restaurant {neighborhood}",
+      "special occasion restaurant {city}",
+      "tasting menu {city}",
+      "chef's table {city}",
+      "romantic dinner {city}"
+    ],
+    "hotel_restaurant": [
+      "hotel restaurant {city}",
+      "hotel dining {city}",
+      "boutique hotel {city}",
+      "where to stay {city}",
+      "hotel with restaurant {city}",
+      "lodging {city}"
+    ]
+  },
+
+  "rsa_templates": {
+    "pe_search": {
+      "headlines": {
+        "_max_chars": 30,
+        "templates": [
+          "Private Dining in {city}",
+          "Book Your Private Event",
+          "Private Rooms Available",
+          "{client_name} Events",
+          "Host Your Next Event Here",
+          "Corporate Events {city}",
+          "Birthday Party Venue",
+          "Private Event Space",
+          "Celebrate at {client_name}",
+          "{client_name} Private Dining",
+          "Group Dining {city}",
+          "Event Space in {neighborhood}",
+          "Rehearsal Dinner Venue",
+          "Team Building Venue {city}",
+          "Book a Private Room"
+        ]
+      },
+      "descriptions": {
+        "_max_chars": 90,
+        "templates": [
+          "Private events at {client_name}. Custom menus, dedicated space, full bar.",
+          "Private dining in {neighborhood}. Corporate events, birthdays & celebrations.",
+          "Private event venue in {city}. {client_name} offers custom packages for groups.",
+          "Private events at {client_name}. Flexible space, full bar, {neighborhood}.",
+          "Celebrate at {client_name}. Private rooms, custom menus, full event planning."
+        ]
+      }
+    },
+    "foot_traffic_pmax": {
+      "headlines": {
+        "_max_chars": 30,
+        "templates": [
+          "{client_name}",
+          "Best {cuisine} in {city}",
+          "{cuisine} in {neighborhood}",
+          "Dine at {client_name}",
+          "Visit {client_name} Today",
+          "Reserve Your Table",
+          "{neighborhood} Dining",
+          "Authentic {cuisine}",
+          "Open for Lunch & Dinner",
+          "{client_name} {neighborhood}",
+          "Award-Winning {cuisine}",
+          "Taste the Difference",
+          "Your New Favorite Spot",
+          "Happy Hour Daily",
+          "Weekend Brunch"
+        ]
+      },
+      "long_headlines": {
+        "_max_chars": 90,
+        "templates": [
+          "Discover {client_name} — Authentic {cuisine} in the Heart of {neighborhood}",
+          "The Best {cuisine} Restaurant in {city}. Reserve Your Table at {client_name} Today.",
+          "{client_name} in {neighborhood}. Come for the {cuisine}, Stay for the Experience.",
+          "Looking for Great {cuisine} in {city}? Visit {client_name} in {neighborhood}.",
+          "Enjoy {cuisine} Cuisine at {client_name}. Now Open in {neighborhood}, {city}."
+        ]
+      },
+      "descriptions": {
+        "_max_chars": 90,
+        "templates": [
+          "Best {cuisine} in {neighborhood}. Visit {client_name} for lunch, dinner, or happy hour.",
+          "{client_name}: authentic {cuisine} in {neighborhood}. Reserve your table today.",
+          "Craving {cuisine}? {client_name} in {neighborhood}. Fresh, flavorful dishes daily.",
+          "{client_name} in {neighborhood}. Authentic {cuisine}, full bar, great atmosphere.",
+          "{client_name}: exceptional {cuisine} dining in {city}. Open 7 days a week."
+        ]
+      }
+    }
+  }
+}

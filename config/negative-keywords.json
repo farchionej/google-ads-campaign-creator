@@ -1,0 +1,174 @@
+{
+  "_description": "Base negative keyword lists for Google Ads restaurant campaigns. Applied at launch to prevent wasted spend. All keywords are PHRASE match unless noted.",
+  "_version": "1.0",
+  "_updated": "2026-03-04",
+  "_lessons": "Tres wasted $1,056/28% of spend on irrelevant searches before negatives were added. Cantina's PE campaign succeeded partly because of tight negative lists from day 1.",
+
+  "base_restaurant": {
+    "_description": "Applied to ALL restaurant campaigns regardless of type",
+    "match_type": "PHRASE",
+    "keywords": [
+      "taco bell",
+      "mcdonald's",
+      "mcdonalds",
+      "domino's",
+      "dominos",
+      "pizza hut",
+      "burger king",
+      "wendy's",
+      "wendys",
+      "chick-fil-a",
+      "chick fil a",
+      "chipotle",
+      "subway",
+      "kfc",
+      "popeyes",
+      "five guys",
+      "in-n-out",
+      "in n out",
+      "panda express",
+      "cheesecake factory",
+      "olive garden",
+      "applebees",
+      "applebee's",
+      "denny's",
+      "dennys",
+      "ihop",
+      "jack in the box",
+      "del taco",
+      "wingstop",
+      "raising cane's",
+      "raising canes",
+      "jobs",
+      "careers",
+      "hiring",
+      "employment",
+      "salary",
+      "apply",
+      "indeed",
+      "glassdoor",
+      "recipe",
+      "how to make",
+      "ingredients",
+      "homemade",
+      "at home",
+      "calories",
+      "nutrition facts",
+      "doordash",
+      "uber eats",
+      "grubhub",
+      "postmates",
+      "seamless",
+      "coupon",
+      "promo code",
+      "groupon",
+      "free food",
+      "discount code",
+      "deal"
+    ]
+  },
+
+  "pe_campaign_specific": {
+    "_description": "Additional negatives for Private Events campaigns. Block general dining intent that leaks into PE targeting.",
+    "_lesson": "Tres PE campaign: 99.6% of impressions were on non-PE terms before these were added.",
+    "match_type": "PHRASE",
+    "keywords": [
+      "menu",
+      "hours",
+      "delivery",
+      "takeout",
+      "pickup",
+      "open now",
+      "happy hour",
+      "lunch",
+      "dinner",
+      "breakfast",
+      "brunch",
+      "reservations",
+      "food near me",
+      "restaurants near me",
+      "best restaurants",
+      "cheap restaurants",
+      "restaurant reviews",
+      "yelp",
+      "tripadvisor",
+      "zagat",
+      "michelin",
+      "san francisco restaurants",
+      "sf restaurants",
+      "restaurants in sf",
+      "where to eat"
+    ]
+  },
+
+  "cuisine_exclusions": {
+    "_description": "Per-cuisine lists. Apply the lists for cuisines the client does NOT serve. E.g., a Mexican restaurant applies not_chinese, not_italian, not_japanese, etc.",
+    "not_mexican": {
+      "match_type": "PHRASE",
+      "keywords": ["mexican food", "mexican restaurant", "tacos", "burritos", "enchiladas", "tamales", "taqueria", "comida mexicana"]
+    },
+    "not_chinese": {
+      "match_type": "PHRASE",
+      "keywords": ["chinese food", "chinese restaurant", "dim sum", "chow mein", "lo mein", "fried rice", "wonton", "szechuan", "cantonese"]
+    },
+    "not_italian": {
+      "match_type": "PHRASE",
+      "keywords": ["italian food", "italian restaurant", "pasta", "pizza", "lasagna", "risotto", "trattoria", "pizzeria"]
+    },
+    "not_japanese": {
+      "match_type": "PHRASE",
+      "keywords": ["japanese food", "japanese restaurant", "sushi", "ramen", "udon", "sashimi", "izakaya", "tempura", "teriyaki"]
+    },
+    "not_french": {
+      "match_type": "PHRASE",
+      "keywords": ["french food", "french restaurant", "bistro francais", "brasserie", "crepes", "croissant", "escargot"]
+    },
+    "not_american": {
+      "match_type": "PHRASE",
+      "keywords": ["burgers", "steakhouse", "bbq", "barbecue", "diner food", "american grill", "wings"]
+    },
+    "not_indian": {
+      "match_type": "PHRASE",
+      "keywords": ["indian food", "indian restaurant", "curry", "tikka masala", "naan", "tandoori", "biryani"]
+    },
+    "not_thai": {
+      "match_type": "PHRASE",
+      "keywords": ["thai food", "thai restaurant", "pad thai", "green curry", "tom yum", "thai basil"]
+    },
+    "not_korean": {
+      "match_type": "PHRASE",
+      "keywords": ["korean food", "korean restaurant", "korean bbq", "bibimbap", "bulgogi", "kimchi restaurant"]
+    },
+    "not_vietnamese": {
+      "match_type": "PHRASE",
+      "keywords": ["vietnamese food", "vietnamese restaurant", "pho", "banh mi", "bun bo hue", "spring rolls"]
+    }
+  },
+
+  "sf_pe_competitors": {
+    "_description": "SF market PE competitors. Block searches for competitor event spaces.",
+    "match_type": "PHRASE",
+    "keywords": [
+      "la mar",
+      "charmaine's",
+      "charmaines",
+      "cavalier",
+      "fifty vara",
+      "bespoke events",
+      "city view metreon",
+      "foreign cinema",
+      "merchants exchange",
+      "julia morgan ballroom",
+      "san francisco city hall",
+      "palace hotel"
+    ]
+  },
+
+  "application_rules": {
+    "_description": "Which lists to apply based on campaign type",
+    "foot_traffic_pmax": ["base_restaurant", "cuisine_exclusions"],
+    "pe_search": ["base_restaurant", "pe_campaign_specific", "sf_pe_competitors"],
+    "pe_pmax": ["base_restaurant", "pe_campaign_specific", "cuisine_exclusions", "sf_pe_competitors"],
+    "specialty": ["base_restaurant", "cuisine_exclusions"]
+  }
+}

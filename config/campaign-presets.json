@@ -1,0 +1,289 @@
+{
+  "_description": "Default campaign presets for Google Ads restaurant campaigns. Used by google-ads-campaign-creator agent.",
+  "_version": "1.0",
+  "_updated": "2026-03-04",
+
+  "naming_convention": {
+    "pattern": "Jay St. | {client_name} {campaign_type}",
+    "campaign_types": {
+      "PMAX": "Performance Max (foot traffic)",
+      "Private Events": "Private events search",
+      "PE PMAX": "Private events Performance Max",
+      "Breakfast": "Specialty: breakfast",
+      "Happy Hour": "Specialty: happy hour",
+      "Sports": "Specialty: sports/entertainment"
+    },
+    "examples": [
+      "Jay St. | Harborview PMAX",
+      "Jay St. | Underdogs Cantina Private Events",
+      "Jay St. | KEI PE PMAX"
+    ]
+  },
+
+  "location_targeting": {
+    "_critical": "ALWAYS use PRESENCE only. NEVER use SEARCH_INTEREST or PRESENCE_OR_INTEREST. Tres wasted $1,056 (28% of spend) on out-of-area clicks from area-of-interest targeting.",
+    "positive_geo_target_type": "PRESENCE",
+    "negative_geo_target_type": "PRESENCE_OR_INTEREST"
+  },
+
+  "geo_presets": {
+    "san_francisco": {
+      "radius_miles": 15,
+      "geo_target_constant_id": "1014221",
+      "name": "San Francisco, California",
+      "notes": "Covers SF, parts of Oakland, Daly City, South SF"
+    },
+    "new_orleans": {
+      "radius_miles": 20,
+      "geo_target_constant_id": "1022839",
+      "name": "New Orleans, Louisiana",
+      "notes": "Covers metro area, Metairie, Kenner"
+    },
+    "san_jose": {
+      "radius_miles": 20,
+      "geo_target_constant_id": "1014232",
+      "name": "San Jose, California",
+      "notes": "Covers South Bay, Campbell, Palo Alto, Santa Clara"
+    },
+    "paso_robles": {
+      "radius_miles": 30,
+      "geo_target_constant_id": "1014075",
+      "name": "Paso Robles, California",
+      "notes": "Rural area, wider radius needed. Covers Atascadero, Templeton, San Luis Obispo"
+    },
+    "los_alamos": {
+      "radius_miles": 30,
+      "geo_target_constant_id": "1013955",
+      "name": "Santa Barbara County, California",
+      "notes": "For Skyview, rural area. Covers Solvang, Buellton, Santa Ynez"
+    },
+    "solvang": {
+      "radius_miles": 30,
+      "geo_target_constant_id": "1013955",
+      "name": "Santa Barbara County, California",
+      "notes": "For Hotel Ynez / Nomada properties. Same geo as los_alamos"
+    },
+    "new_york": {
+      "radius_miles": 15,
+      "geo_target_constant_id": "1023191",
+      "name": "New York, New York",
+      "notes": "For Meridian Psychology. Covers Manhattan, parts of Brooklyn/Queens"
+    },
+    "palo_alto": {
+      "radius_miles": 15,
+      "geo_target_constant_id": "1014157",
+      "name": "Palo Alto, California",
+      "notes": "For Kirk's Palo Alto location"
+    }
+  },
+
+  "ad_schedule": {
+    "default": {
+      "start_hour": 10,
+      "end_hour": 22,
+      "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
+      "notes": "10AM-10PM all days. Restaurants don't convert at 3AM."
+    },
+    "weekend_heavy": {
+      "weekday": {"start_hour": 10, "end_hour": 22},
+      "weekend": {"start_hour": 9, "end_hour": 23},
+      "weekend_bid_modifier_percent": 25,
+      "notes": "Extended weekend hours + 25% bid boost. Good for casual dining."
+    },
+    "lunch_dinner": {
+      "start_hour": 11,
+      "end_hour": 21,
+      "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
+      "notes": "Tighter window for fine dining with only lunch/dinner service"
+    }
+  },
+
+  "budget_defaults": {
+    "foot_traffic_pmax": {
+      "min_daily_usd": 5,
+      "recommended_daily_usd": 10,
+      "max_daily_usd": 15,
+      "notes": "Start low, scale based on conversion volume"
+    },
+    "pe_search": {
+      "min_daily_usd": 15,
+      "recommended_daily_usd": 20,
+      "max_daily_usd": 30,
+      "notes": "PE keywords are competitive. Cantina averaged $3.57 CPC."
+    },
+    "pe_pmax": {
+      "min_daily_usd": 10,
+      "recommended_daily_usd": 15,
+      "max_daily_usd": 20,
+      "notes": "Phase 2 only — launch after Search has 30+ days of data"
+    },
+    "specialty": {
+      "min_daily_usd": 5,
+      "recommended_daily_usd": 10,
+      "max_daily_usd": 15,
+      "notes": "Breakfast, Happy Hour, etc."
+    }
+  },
+
+  "bid_strategy": {
+    "launch": {
+      "type": "MAXIMIZE_CONVERSIONS",
+      "notes": "No target CPA at launch. Let the system learn."
+    },
+    "optimized": {
+      "type": "TARGET_CPA",
+      "trigger": "After 30 days AND 15+ conversions",
+      "target_cpa_guidelines": {
+        "foot_traffic": "Set to 120% of actual CPA from first 30 days",
+        "pe_search": "$50-100 per lead (acceptable for $3K+ events)",
+        "pe_pmax": "Match PE Search CPA"
+      }
+    }
+  },
+
+  "pmax_asset_group_themes": {
+    "foot_traffic": {
+      "general_food": {
+        "name": "{client_name} - General",
+        "search_themes": ["{cuisine} restaurant {city}", "{cuisine} food {neighborhood}", "best {cuisine} {city}", "restaurants near {neighborhood}"],
+        "required": true
+      },
+      "happy_hour": {
+        "name": "{client_name} - Happy Hour",
+        "search_themes": ["happy hour {neighborhood}", "drink specials {city}", "cocktails {neighborhood}", "bar near {neighborhood}"],
+        "required": false,
+        "notes": "Skip for fine dining"
+      },
+      "sports_entertainment": {
+        "name": "{client_name} - Sports & Entertainment",
+        "search_themes": ["sports bar {city}", "watch game {neighborhood}", "bar with tvs {city}"],
+        "required": false,
+        "notes": "Only for sports bars (Underdogs, etc.)"
+      },
+      "spanish_language": {
+        "name": "{client_name} - Español",
+        "search_themes": ["restaurante mexicano {city}", "comida mexicana {neighborhood}", "mejor restaurante mexicano {city}"],
+        "required": false,
+        "notes": "Only for Mexican/Latin restaurants with Spanish-speaking clientele"
+      }
+    },
+    "private_events": {
+      "corporate": {
+        "name": "{client_name} PE - Corporate",
+        "search_themes": ["corporate event space {city}", "team building venue {city}", "company dinner {city}", "business lunch venue {city}"],
+        "audience_signals": ["in_market_event_planning", "custom_corporate_events"],
+        "required": true
+      },
+      "birthday_celebration": {
+        "name": "{client_name} PE - Celebrations",
+        "search_themes": ["birthday party restaurant {city}", "celebration dinner {city}", "anniversary dinner {city}", "party venue {city}"],
+        "audience_signals": ["in_market_event_planning", "custom_celebrations"],
+        "required": true
+      },
+      "private_dining": {
+        "name": "{client_name} PE - Private Dining",
+        "search_themes": ["private dining {city}", "private room restaurant {city}", "restaurants with private rooms {city}"],
+        "audience_signals": ["in_market_event_planning", "custom_private_dining"],
+        "required": true
+      },
+      "wedding_rehearsal": {
+        "name": "{client_name} PE - Weddings",
+        "search_themes": ["rehearsal dinner {city}", "wedding reception restaurant {city}", "wedding venue {city}"],
+        "audience_signals": ["in_market_wedding_planning"],
+        "required": false,
+        "notes": "Only for venues that host weddings"
+      }
+    }
+  },
+
+  "pe_pmax_audience_signals": {
+    "_critical": "PE PMax REQUIRES audience signals. Without them, 30%+ of impressions leak to general food queries (seen at Cantina).",
+    "custom_segments": {
+      "event_venue_searches": {
+        "type": "CUSTOM_INTENT",
+        "keywords": ["private event venue", "event space rental", "party venue rental", "corporate event venue", "private dining room"]
+      },
+      "competitor_urls": {
+        "type": "CUSTOM_INTENT",
+        "urls": ["peerspace.com", "theknot.com", "eventbrite.com", "weddingwire.com"]
+      }
+    },
+    "in_market_audiences": [
+      {"name": "Event Planning Services", "id": "80432"},
+      {"name": "Catering Services", "id": "80433"},
+      {"name": "Wedding Services", "id": "80434"}
+    ],
+    "demographics": {
+      "age_min": 25,
+      "age_max": 65,
+      "household_income": "TOP_50_PERCENT",
+      "notes": "Event bookers skew older and higher income"
+    }
+  },
+
+  "conversion_actions_required": {
+    "_critical": "All must exist before campaign launch. Verify with verify_prerequisites().",
+    "foot_traffic": ["phone_call_click", "reservation_click", "directions_click"],
+    "private_events": ["phone_call_click", "private_event_form", "reservation_click"],
+    "notes": "form_submission maps to private_event_form in most client setups"
+  },
+
+  "campaign_packages": {
+    "standard": {
+      "campaigns": ["foot_traffic_pmax", "pe_search"],
+      "description": "Default package for most restaurants. Foot traffic PMax + PE Search.",
+      "monthly_budget_range_usd": [750, 1050]
+    },
+    "expanded": {
+      "campaigns": ["foot_traffic_pmax", "pe_search", "pe_pmax"],
+      "description": "Add PE PMax after Search has 30+ days. Full-funnel PE coverage.",
+      "monthly_budget_range_usd": [1050, 1500],
+      "pe_pmax_launch_criteria": "PE Search active 30+ days with 15+ conversions"
+    },
+    "full": {
+      "campaigns": ["foot_traffic_pmax", "pe_search", "pe_pmax", "specialty"],
+      "description": "Everything + a specialty campaign (breakfast, happy hour, etc.).",
+      "monthly_budget_range_usd": [1350, 1950]
+    }
+  },
+
+  "client_geo_map": {
+    "_description": "Maps client keys to their correct geo preset. For clients not listed, read profile.city from clients.json.",
+    "harborview": "san_francisco",
+    "hot_johnnies": "new_orleans",
+    "nisei": "san_francisco",
+    "californios": "san_francisco",
+    "galene": "san_francisco",
+    "3rd_cousin": "san_francisco",
+    "grubstake": "san_francisco",
+    "kei": "san_francisco",
+    "dacha": "san_francisco",
+    "amarena": "san_francisco",
+    "le_soleil": "san_francisco",
+    "54_mint": "san_francisco",
+    "mr_magic": "san_francisco",
+    "indigo": "san_francisco",
+    "district_sj": "san_jose",
+    "kirks": "san_jose",
+    "ezydog": "san_francisco",
+    "underdogs_tres": "san_francisco",
+    "underdogs_basketball": "san_francisco",
+    "underdogs_cantina": "san_francisco",
+    "new_spot_polk": "san_francisco",
+    "limoncello": "san_francisco",
+    "san_benito": "san_francisco",
+    "tacko": "san_francisco",
+    "north_beach_cantina": "san_francisco",
+    "meridian": "new_york",
+    "cote_ouest": "san_francisco",
+    "johns_grill": "san_francisco",
+    "carruba": "san_jose",
+    "farmhouse_paso": "paso_robles",
+    "river_lodge": "paso_robles",
+    "granada_hotel": "paso_robles",
+    "skyview": "los_alamos",
+    "hotel_ynez": "solvang",
+    "nomada_at_sea": "paso_robles",
+    "pozo_saloon": "paso_robles"
+  }
+}

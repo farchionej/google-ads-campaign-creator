@@ -1,0 +1,129 @@
+{
+  "_description": "Reusable headline/description formulas by campaign type. Variables: {client_name}, {city}, {neighborhood}, {cuisine}. Source field tracks where each template originated. Performance tier: untested → promising → proven.",
+  "_version": "1.0",
+  "_updated": "2026-03-04",
+
+  "foot_traffic_pmax": {
+    "headlines": [
+      {"text": "{client_name}", "source": "universal", "performance_tier": "proven", "notes": "Brand name always included"},
+      {"text": "Best {cuisine} in {city}", "source": "portfolio_pattern", "performance_tier": "proven", "notes": "Top performer across multiple clients"},
+      {"text": "{cuisine} in {neighborhood}", "source": "portfolio_pattern", "performance_tier": "proven", "notes": "Local neighborhood targeting"},
+      {"text": "Dine at {client_name}", "source": "portfolio_pattern", "performance_tier": "promising", "notes": ""},
+      {"text": "Visit {client_name} Today", "source": "portfolio_pattern", "performance_tier": "promising", "notes": ""},
+      {"text": "Reserve Your Table", "source": "portfolio_pattern", "performance_tier": "proven", "notes": "Strong CTA headline"},
+      {"text": "{neighborhood} Dining", "source": "portfolio_pattern", "performance_tier": "promising", "notes": ""},
+      {"text": "Authentic {cuisine}", "source": "portfolio_pattern", "performance_tier": "promising", "notes": ""},
+      {"text": "Open for Lunch & Dinner", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "{client_name} {neighborhood}", "source": "portfolio_pattern", "performance_tier": "proven", "notes": "Brand + location combo"},
+      {"text": "Award-Winning {cuisine}", "source": "portfolio_pattern", "performance_tier": "untested", "notes": "Only use if client has awards"},
+      {"text": "Taste the Difference", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "Your New Favorite Spot", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "Happy Hour Daily", "source": "portfolio_pattern", "performance_tier": "untested", "notes": "Only for venues with happy hour"},
+      {"text": "Weekend Brunch", "source": "portfolio_pattern", "performance_tier": "untested", "notes": "Only for venues with brunch service"}
+    ],
+    "long_headlines": [
+      {"text": "Discover {client_name} — Authentic {cuisine} in the Heart of {neighborhood}", "source": "portfolio_pattern", "performance_tier": "promising"},
+      {"text": "The Best {cuisine} Restaurant in {city}. Reserve Your Table at {client_name} Today.", "source": "portfolio_pattern", "performance_tier": "promising"},
+      {"text": "{client_name} in {neighborhood}. Come for the {cuisine}, Stay for the Experience.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Looking for Great {cuisine} in {city}? Visit {client_name} in {neighborhood}.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Enjoy {cuisine} Cuisine at {client_name}. Now Open in {neighborhood}, {city}.", "source": "portfolio_pattern", "performance_tier": "untested"}
+    ],
+    "descriptions": [
+      {"text": "Visit {client_name} in {neighborhood} for lunch, dinner, or happy hour.", "source": "portfolio_pattern", "performance_tier": "promising"},
+      {"text": "{client_name}: authentic {cuisine} in {neighborhood}. Reserve today.", "source": "portfolio_pattern", "performance_tier": "promising"},
+      {"text": "{client_name} in {neighborhood}. Great food, full bar, welcoming vibe.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "{client_name} in {neighborhood}. Authentic {cuisine}, great atmosphere.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "{client_name}: {cuisine} dining in {city}. Open 7 days a week.", "source": "portfolio_pattern", "performance_tier": "untested"}
+    ]
+  },
+
+  "pe_search": {
+    "headlines": [
+      {"text": "Private Dining in {city}", "source": "cantina_pe_search", "performance_tier": "proven", "notes": "Cantina's top-converting headline theme"},
+      {"text": "Book Your Private Event", "source": "cantina_pe_search", "performance_tier": "proven", "notes": "Strong CTA, 25 PE leads"},
+      {"text": "Private Rooms Available", "source": "cantina_pe_search", "performance_tier": "promising", "notes": ""},
+      {"text": "{client_name} Events", "source": "cantina_pe_search", "performance_tier": "promising", "notes": ""},
+      {"text": "Host Your Next Event Here", "source": "cantina_pe_search", "performance_tier": "promising", "notes": ""},
+      {"text": "Corporate Events {city}", "source": "cantina_pe_search", "performance_tier": "promising", "notes": ""},
+      {"text": "Birthday Party Venue", "source": "cantina_pe_search", "performance_tier": "untested", "notes": ""},
+      {"text": "Private Event Space", "source": "cantina_pe_search", "performance_tier": "proven", "notes": ""},
+      {"text": "Celebrate at {client_name}", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "{client_name} Private Dining", "source": "portfolio_pattern", "performance_tier": "promising", "notes": ""},
+      {"text": "Group Dining {city}", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "Event Space in {neighborhood}", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "Rehearsal Dinner Venue", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "Team Building Venue {city}", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "Book a Private Room", "source": "portfolio_pattern", "performance_tier": "promising", "notes": ""}
+    ],
+    "descriptions": [
+      {"text": "Private events at {client_name}. Custom menus, dedicated space, full bar.", "source": "cantina_pe_search", "performance_tier": "proven", "notes": "Cantina's top-performing description"},
+      {"text": "Private dining in {neighborhood}. Corporate events, birthdays & celebrations.", "source": "cantina_pe_search", "performance_tier": "proven", "notes": ""},
+      {"text": "Private event venue in {city}. {client_name} offers custom packages for groups.", "source": "portfolio_pattern", "performance_tier": "promising", "notes": ""},
+      {"text": "Private events at {client_name}. Flexible space, full bar, {neighborhood}.", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""},
+      {"text": "Celebrate at {client_name}. Private rooms, custom menus, full event planning.", "source": "portfolio_pattern", "performance_tier": "untested", "notes": ""}
+    ]
+  },
+
+  "pe_pmax": {
+    "headlines": [
+      {"text": "Private Events at {client_name}", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Book Your Private Event", "source": "cantina_pe_search", "performance_tier": "proven"},
+      {"text": "Private Dining {city}", "source": "cantina_pe_search", "performance_tier": "proven"},
+      {"text": "Event Space {neighborhood}", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "{client_name} Events", "source": "cantina_pe_search", "performance_tier": "promising"},
+      {"text": "Corporate Event Venue", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Celebrate With Us", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Host Your Next Party", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Private Rooms in {city}", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Plan Your Event Today", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Birthday Celebrations", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Team Building Events", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Wedding Rehearsal Dinner", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Custom Event Menus", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Reserve Your Space", "source": "portfolio_pattern", "performance_tier": "untested"}
+    ],
+    "long_headlines": [
+      {"text": "Host Your Next Private Event at {client_name} in {neighborhood}, {city}", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Private Dining Rooms & Event Space at {client_name}. Custom Menus Available.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Looking for a Private Event Venue in {city}? {client_name} Has You Covered.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Corporate Events, Birthdays & Celebrations at {client_name} in {neighborhood}.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Plan the Perfect Private Event at {client_name}. Full Bar, Custom Menus, Dedicated Space.", "source": "portfolio_pattern", "performance_tier": "untested"}
+    ],
+    "descriptions": [
+      {"text": "Private events at {client_name}. Custom menus, dedicated space, full bar.", "source": "cantina_pe_search", "performance_tier": "proven"},
+      {"text": "Private dining in {neighborhood}. Corporate events, birthdays & celebrations.", "source": "cantina_pe_search", "performance_tier": "proven"},
+      {"text": "Private event venue in {city}. {client_name} offers custom packages for groups.", "source": "portfolio_pattern", "performance_tier": "promising"},
+      {"text": "{client_name} private events: dedicated space, full bar, custom menus.", "source": "portfolio_pattern", "performance_tier": "untested"},
+      {"text": "Corporate dinners to birthday celebrations. {client_name} in {city}.", "source": "portfolio_pattern", "performance_tier": "untested"}
+    ]
+  },
+
+  "specialty": {
+    "breakfast": {
+      "headlines": [
+        {"text": "Breakfast at {client_name}", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Best Breakfast {city}", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Morning at {client_name}", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Breakfast {neighborhood}", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Start Your Day Right", "source": "portfolio_pattern", "performance_tier": "untested"}
+      ],
+      "descriptions": [
+        {"text": "Start your morning at {client_name} in {neighborhood}. Fresh breakfast, great coffee, welcoming space.", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Breakfast at {client_name}. Locally sourced ingredients, house-made specialties, open early.", "source": "portfolio_pattern", "performance_tier": "untested"}
+      ]
+    },
+    "happy_hour": {
+      "headlines": [
+        {"text": "Happy Hour at {client_name}", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Happy Hour {neighborhood}", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Cocktails & Bites", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "After-Work Drinks {city}", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Drink Specials Daily", "source": "portfolio_pattern", "performance_tier": "untested"}
+      ],
+      "descriptions": [
+        {"text": "Happy hour at {client_name} in {neighborhood}. Craft cocktails, shareable bites, great atmosphere.", "source": "portfolio_pattern", "performance_tier": "untested"},
+        {"text": "Unwind at {client_name}. Daily happy hour specials on drinks and appetizers in {neighborhood}.", "source": "portfolio_pattern", "performance_tier": "untested"}
+      ]
+    }
+  }
+}

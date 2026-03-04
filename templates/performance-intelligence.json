@@ -1,0 +1,116 @@
+{
+  "_description": "Performance intelligence layer. Tracks how templates/headlines/keywords perform across the portfolio. Updated during monthly audits. Informs template selection for new campaigns.",
+  "_version": "1.0",
+  "_updated": "2026-03-04",
+  "_methodology": "V1 is manual: agent reads performance data during audits and updates this file. Structure ready for automated pipeline later.",
+
+  "seed_data": {
+    "_source": "Underdogs Cantina + Tres audit (January-February 2026)",
+
+    "cantina_pe_search": {
+      "campaign_name": "Jay St. | Underdogs Cantina Private Events",
+      "campaign_type": "pe_search",
+      "account_id": "9639936054",
+      "date_range": "2025-07-01 to 2026-02-28",
+      "summary": {
+        "total_pe_leads": 25,
+        "total_spend": "~$2,800",
+        "avg_cpc": "$3.57",
+        "estimated_revenue": "$92,000+ from PE leads"
+      },
+      "converting_search_terms": [
+        {"term": "private dining san francisco", "conversions": 8, "notes": "Top converter"},
+        {"term": "restaurants with private rooms san francisco", "conversions": 5, "notes": ""},
+        {"term": "event space rental san francisco", "conversions": 3, "notes": ""}
+      ],
+      "top_headlines_by_impressions": [
+        "Private Dining in San Francisco",
+        "Book Your Private Event",
+        "Private Event Space"
+      ],
+      "top_descriptions_by_impressions": [
+        "Host unforgettable private events at Underdogs Cantina. Custom menus, dedicated space, full bar.",
+        "Private dining rooms in Inner Sunset. Perfect for corporate events, birthdays & celebrations."
+      ]
+    },
+
+    "tres_pe_lessons": {
+      "campaign_name": "Tres - Private Events",
+      "campaign_type": "pe_search",
+      "account_id": "5673960866",
+      "date_range": "2025-07-01 to 2026-01-09",
+      "summary": {
+        "total_pe_leads": 0,
+        "total_spend": "$1,056",
+        "wasted_on_irrelevant": "$1,056 (100%)",
+        "root_cause": "No negative keywords, exact match only, wrong search intent"
+      },
+      "anti_patterns": [
+        {"pattern": "Exact match PE keywords", "result": "Zero clicks in 54 days on 15 exact keywords", "lesson": "Always use PHRASE match for PE keywords"},
+        {"pattern": "No negative keywords at launch", "result": "99.6% of impressions on non-PE terms", "lesson": "Apply base negatives BEFORE enabling campaign"},
+        {"pattern": "Area of interest targeting", "result": "28% of spend on out-of-area users", "lesson": "PRESENCE only, never area of interest"},
+        {"pattern": "No ad schedule", "result": "Spend during non-converting hours", "lesson": "10AM-10PM default, adjust after data"}
+      ]
+    },
+
+    "cantina_foot_traffic_pmax": {
+      "campaign_name": "Jay St. | Underdogs Cantina PMAX",
+      "campaign_type": "foot_traffic_pmax",
+      "account_id": "9639936054",
+      "date_range": "2025-07-01 to 2026-02-28",
+      "summary": {
+        "total_conversions": "150+",
+        "primary_conversions": "phone_call_click, reservation_click, directions_click"
+      },
+      "effective_search_themes": [
+        "mexican restaurant san francisco",
+        "sports bar inner sunset",
+        "best tacos san francisco",
+        "cantina san francisco"
+      ],
+      "notes": "Strong foot traffic driver. Asset groups for general food + sports worked well. Happy hour asset group underperformed."
+    }
+  },
+
+  "template_performance": {
+    "_description": "Aggregated performance by template. Updated during audits. Keys match copy-templates.json entries.",
+    "headlines": {},
+    "descriptions": {},
+    "keywords": {},
+    "search_themes": {}
+  },
+
+  "cross_portfolio_insights": {
+    "_description": "Patterns observed across multiple clients. Added during audits.",
+    "insights": [
+      {
+        "insight": "PHRASE match dramatically outperforms EXACT for PE keywords",
+        "evidence": "Cantina (phrase) = 25 PE leads. Tres (exact) = 0 leads. Same market, same period.",
+        "confidence": "high",
+        "date_observed": "2026-01-09",
+        "applies_to": ["pe_search"]
+      },
+      {
+        "insight": "Presence-only targeting eliminates 25-30% wasted spend in metro areas",
+        "evidence": "Tres had 28% out-of-area spend before fix. Common pattern in SF campaigns.",
+        "confidence": "high",
+        "date_observed": "2026-01-09",
+        "applies_to": ["all"]
+      },
+      {
+        "insight": "PE PMax without audience signals leaks 30%+ to general food queries",
+        "evidence": "Cantina PE PMax search term analysis showed food queries without PE intent",
+        "confidence": "medium",
+        "date_observed": "2026-02-15",
+        "applies_to": ["pe_pmax"]
+      },
+      {
+        "insight": "Base negative keywords should be applied BEFORE campaign goes live",
+        "evidence": "Every campaign without day-1 negatives accumulates wasted spend in first 2 weeks",
+        "confidence": "high",
+        "date_observed": "2026-01-09",
+        "applies_to": ["all"]
+      }
+    ]
+  }
+}

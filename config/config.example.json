@@ -1,0 +1,7 @@
+{
+  "gcp_project": "your-gcp-project-id",
+  "google_ads": {
+    "developer_token": "your-developer-token",
+    "mcc_id": "your-mcc-account-id"
+  }
+}
