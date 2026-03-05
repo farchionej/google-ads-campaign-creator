@@ -253,7 +253,8 @@ class CampaignCreator:
         })
 
         conv_query = """
-            SELECT conversion_action.name, conversion_action.status
+            SELECT conversion_action.name, conversion_action.status,
+                conversion_action.value_settings.default_value
             FROM conversion_action
             WHERE conversion_action.status = 'ENABLED'
         """
@@ -268,10 +269,123 @@ class CampaignCreator:
                     "detail": "Found" if found else "MISSING"
                 })
 
+            # Check PE form tracking
+            has_pe_form = any("private_event" in n.lower() or "pe_form" in n.lower() for n in conv_names)
+            checks.append({
+                "check": "PE form tracking",
+                "passed": has_pe_form,
+                "detail": "Found" if has_pe_form else "WARNING: No PE form action — PE campaigns cannot track leads"
+            })
+
+            # Check conversion values non-zero
+            pe_form_names = ["private_event_form", "pe_form_submit"]
+            phone_names = ["phone_call_click", "phone_call"]
+            for row in conv_results:
+                action = row.get("conversionAction", {})
+                name = action.get("name", "")
+                default_val = action.get("valueSettings", {}).get("defaultValue", 0)
+                is_pe = any(n in name.lower() for n in pe_form_names)
+                is_phone = any(n in name.lower() for n in phone_names)
+                if is_pe or is_phone:
+                    has_value = default_val and float(default_val) > 0
+                    checks.append({
+                        "check": f"Conversion value: {name}",
+                        "passed": has_value,
+                        "detail": f"${default_val}" if has_value else "WARNING: $0 — run configure_pe_conversion_values()"
+                    })
+
         checks.append({"check": "City", "passed": bool(self.city), "detail": self.city or "MISSING"})
         checks.append({"check": "Website", "passed": bool(self.website), "detail": self.website or "MISSING"})
 
         return {"passed": all(c["passed"] for c in checks), "checks": checks}
+
+    # ==================== PE CONVERSION VALUES ====================
+
+    def configure_pe_conversion_values(self, avg_event_value: float, avg_check: float) -> Dict:
+        """
+        Set conversion values on PE-relevant conversion actions.
+
+        Args:
+            avg_event_value: Average private event value (e.g., 5000)
+            avg_check: Average dinner check (e.g., 85)
+
+        Returns:
+            Dict with 'updated' list and 'errors' list
+        """
+        if not avg_event_value:
+            return {"updated": [], "errors": ["avg_event_value is required"]}
+
+        pe_form_value = round(avg_event_value * 0.33, 2)
+        phone_call_value = round(avg_check * 0.50, 2)
+
+        query = """
+            SELECT conversion_action.resource_name, conversion_action.name,
+                conversion_action.value_settings.default_value
+            FROM conversion_action WHERE conversion_action.status = 'ENABLED'
+        """
+        success, results = self._search_api(query)
+        if not success:
+            return {"updated": [], "errors": ["Failed to query conversion actions"]}
+
+        pe_form_patterns = [
+            "private event", "event form", "event inquiry", "event lead",
+            "private dining", "wedding form", "wedding venue",
+            "corporate event", "farm venue", "venue form",
+            "catering form", "group form", "party form",
+        ]
+        pe_form_exclusions = ["quality visit", "scroll", "30 sec"]
+        phone_patterns = [
+            "click call", "calls from ads",
+            "phone_number_click", "phone number click", "call click",
+        ]
+        unmodifiable_types = ["GOOGLE_HOSTED", "SMART_CAMPAIGN_AD_CLICKS_TO_CALL",
+                              "SMART_CAMPAIGN_MAP_CLICKS_TO_CALL", "SMART_CAMPAIGN_MAP_DIRECTIONS",
+                              "SMART_CAMPAIGN_TRACKED_CALLS", "STORE_VISITS"]
+        updated, errors = [], []
+
+        for row in results:
+            action = row.get("conversionAction", {})
+            name = action.get("name", "").lower()
+            resource_name = action.get("resourceName", "")
+            action_type = action.get("type", "")
+            if action_type in unmodifiable_types:
+                continue
+            target_value = None
+            is_pe_match = any(p in name for p in pe_form_patterns)
+            is_excluded = any(e in name for e in pe_form_exclusions)
+            if is_pe_match and not is_excluded:
+                target_value = pe_form_value
+            elif any(p in name for p in phone_patterns):
+                target_value = phone_call_value
+            if target_value is None:
+                continue
+
+            current_value = action.get("valueSettings", {}).get("defaultValue", 0)
+            if current_value == target_value:
+                updated.append({"name": action.get("name", ""), "value": target_value, "status": "already_set"})
+                continue
+
+            mutate_url = f"{self.BASE_URL}/customers/{self.account_id}/conversionActions:mutate"
+            payload = {
+                "operations": [{
+                    "update": {
+                        "resourceName": resource_name,
+                        "valueSettings": {
+                            "defaultValue": target_value,
+                            "defaultCurrencyCode": "USD",
+                            "alwaysUseDefaultValue": True
+                        }
+                    },
+                    "updateMask": "valueSettings.defaultValue,valueSettings.defaultCurrencyCode,valueSettings.alwaysUseDefaultValue"
+                }]
+            }
+            success, response = self._api_request(mutate_url, "POST", payload)
+            if success:
+                updated.append({"name": action.get("name", ""), "value": target_value, "previous_value": current_value, "status": "updated"})
+            else:
+                errors.append({"name": action.get("name", ""), "error": response.get("error", "Unknown error")})
+
+        return {"pe_form_value": pe_form_value, "phone_call_value": phone_call_value, "updated": updated, "errors": errors}
 
     # ==================== NEGATIVE KEYWORDS ====================
 
@@ -481,6 +595,41 @@ class CampaignCreator:
             return response.get("results", [{}])[0].get("resourceName", "")
         return None
 
+    def _create_audience(self, name: str, in_market_audiences: List[Dict]) -> Optional[str]:
+        """Create an Audience resource with in-market segments. Returns resource name."""
+        segments = []
+        for aud in in_market_audiences:
+            aud_id = aud.get("id", "")
+            if aud_id:
+                segments.append({
+                    "userInterest": {
+                        "userInterestCategory": f"customers/{self.account_id}/userInterests/{aud_id}"
+                    }
+                })
+        if not segments:
+            return None
+        url = f"{self.BASE_URL}/customers/{self.account_id}/audiences:mutate"
+        payload = {
+            "operations": [{
+                "create": {
+                    "name": name,
+                    "description": "PE audience signal — in-market event planning segments",
+                    "dimensions": [{
+                        "audienceSegments": {
+                            "segments": segments
+                        }
+                    }]
+                }
+            }]
+        }
+        success, response = self._api_request(url, "POST", payload)
+        if success:
+            rn = response.get("results", [{}])[0].get("resourceName", "")
+            self._created_resources.append({"type": "audience", "resource_name": rn, "name": name})
+            return rn
+        print(f"WARNING: Failed to create audience '{name}': {response.get('error', '')}")
+        return None
+
     def build_asset_group(self, campaign_rn: str, group_config: Dict, headline_rns: List[str], description_rns: List[str], long_headline_rns: List[str], image_rns: Dict, audience_signals: Dict = None) -> Optional[str]:
         url = f"{self.BASE_URL}/customers/{self.account_id}/googleAds:mutate"
         ag_temp_id = "-1"
@@ -503,24 +652,23 @@ class CampaignCreator:
             operations.append({"assetGroupSignalOperation": {"create": {"assetGroup": f"customers/{self.account_id}/assetGroups/{ag_temp_id}", "searchTheme": {"text": theme}}}})
 
         # Audience signals (for PE PMax)
-        if audience_signals:
-            signal_op = {
-                "assetGroupSignalOperation": {
-                    "create": {
-                        "assetGroup": f"customers/{self.account_id}/assetGroups/{ag_temp_id}",
-                        "audience": {
-                            "userInterests": []
+        # Requires creating an Audience resource first, then referencing it
+        if audience_signals and audience_signals.get("in_market_audiences"):
+            audience_rn = self._create_audience(
+                name=f"{group_config['name']} - PE Audience Signal",
+                in_market_audiences=audience_signals["in_market_audiences"]
+            )
+            if audience_rn:
+                operations.append({
+                    "assetGroupSignalOperation": {
+                        "create": {
+                            "assetGroup": f"customers/{self.account_id}/assetGroups/{ag_temp_id}",
+                            "audience": {
+                                "audience": audience_rn
+                            }
                         }
                     }
-                }
-            }
-            if audience_signals.get("in_market_audiences"):
-                for aud in audience_signals["in_market_audiences"]:
-                    signal_op["assetGroupSignalOperation"]["create"]["audience"]["userInterests"].append({
-                        "userInterestCategory": f"customers/{self.account_id}/userInterests/{aud.get('id', '')}"
-                    })
-            if signal_op["assetGroupSignalOperation"]["create"]["audience"]["userInterests"]:
-                operations.append(signal_op)
+                })
 
         success, response = self._api_request(url, "POST", {"mutateOperations": operations})
         if success:

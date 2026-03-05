@@ -230,6 +230,20 @@
     "notes": "form_submission maps to private_event_form in most client setups"
   },
 
+  "conversion_value_settings": {
+    "_critical": "PE conversion actions MUST have non-zero default values.",
+    "pe_form_actions": {
+      "formula": "avg_event_value × 0.33",
+      "patterns": ["private event", "event form", "event inquiry", "event lead", "private dining", "wedding form", "corporate event", "catering form", "group form"],
+      "exclusions": ["quality visit", "scroll", "30 sec"]
+    },
+    "phone_call_actions": {
+      "formula": "avg_check × 0.50",
+      "patterns": ["click call", "calls from ads", "phone_number_click", "call click"]
+    },
+    "unmodifiable_types": ["GOOGLE_HOSTED", "SMART_CAMPAIGN_AD_CLICKS_TO_CALL", "SMART_CAMPAIGN_MAP_CLICKS_TO_CALL", "STORE_VISITS"]
+  },
+
   "campaign_packages": {
     "standard": {
       "campaigns": ["foot_traffic_pmax", "pe_search"],

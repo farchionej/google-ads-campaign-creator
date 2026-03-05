@@ -71,6 +71,18 @@ Safety pattern — user reviews and enables manually.
 ### 6. 3-5 Asset Groups per PMax Campaign
 Minimum 3 for adequate signal diversity. Maximum 5 to avoid dilution.
 
+### 7. Conversion Values Must Be Set (PE Campaigns)
+Without conversion values, Google's bidding ML treats a $15K event the same as a $25 lunch inquiry.
+
+**Formulas**:
+- PE form actions: `avg_event_value × 0.33`
+- Phone call actions: `avg_check × 0.50`
+
+**Apply via**: `creator.configure_pe_conversion_values(avg_event_value=5000, avg_check=85)`
+
+### 8. Audience Signals via Audience Resource
+PE PMax audience signals must be created as an `Audience` resource first, then referenced in the asset group signal. Do NOT put `userInterests` directly in the signal payload.
+
 ---
 
 ## PE Search Setup
